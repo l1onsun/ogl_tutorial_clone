@@ -525,6 +525,18 @@ target_link_libraries(playground
 set_target_properties(playground PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/playground/")
 create_target_launcher(playground WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/playground/")
 
+# User playground2
+add_executable(playground2
+		playground2/playground2.cpp
+		common/shader.cpp
+		common/shader.hpp
+		)
+target_link_libraries(playground2
+		${ALL_LIBS}
+		)
+# Xcode and Visual working directories
+set_target_properties(playground2 PROPERTIES XCODE_ATTRIBUTE_CONFIGURATION_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/playground2/")
+create_target_launcher(playground2 WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/playground2/")
 
 
 # Misc 5, with glReadPixels
@@ -755,6 +767,10 @@ add_custom_command(
 add_custom_command(
    TARGET playground POST_BUILD
    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/playground${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/playground/"
+)
+add_custom_command(
+	TARGET playground2 POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_CFG_INTDIR}/playground2${CMAKE_EXECUTABLE_SUFFIX}" "${CMAKE_CURRENT_SOURCE_DIR}/playground2/"
 )
 add_custom_command(
    TARGET misc05_picking_slow_easy POST_BUILD
